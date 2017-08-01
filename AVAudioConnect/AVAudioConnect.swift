@@ -13,20 +13,20 @@ import AVFoundation
 final class GlobalAudio{
     static let shared = GlobalAudio()
     static var engine: AVAudioEngine { return shared.engine }
-    static func attach(node: AVAudioNode){ shared.attach(node: node) }
+    static func attach(_ node: AVAudioNode){ shared.attach(node) }
     static var format: AVAudioFormat { return shared.format }
     static func attach(nodes: [AVAudioNode]){ shared.attach(nodes: nodes) }
     
     
     let engine = AVAudioEngine()
     let format = AVAudioFormat.init(standardFormatWithSampleRate: 44100.0, channels: 2)
-    func attach(node: AVAudioNode){
-        if (node.engine != engine){
+    func attach(_ node: AVAudioNode){
+        if (node.engine == nil){
             engine.attach(node);
         }
     }
     func attach(nodes: [AVAudioNode]){
-        for node in nodes { attach(node: node) }
+        for node in nodes { attach(node) }
     }
 }
 
@@ -34,7 +34,7 @@ final class GlobalAudio{
 extension AVAudioNode {
     
     @discardableResult func connect(to node: AVAudioNode, bus: AVAudioNodeBus = 0, fromBus: AVAudioNodeBus = 0) -> AVAudioNode{
-        GlobalAudio.attach(node: node)
+        GlobalAudio.attach(node)
         GlobalAudio.engine.connect(self,
                                     to: node,
                                     fromBus: fromBus,
