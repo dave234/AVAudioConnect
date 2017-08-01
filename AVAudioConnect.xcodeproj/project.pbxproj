@@ -60,11 +60,11 @@
 		5535EE131F30F1AD00823456 /* AVAudioConnect */ = {
 			isa = PBXGroup;
 			children = (
-				5535EE141F30F1AD00823456 /* AppDelegate.swift */,
 				5535EE161F30F1AD00823456 /* ViewController.swift */,
 				5535EE261F30F1BE00823456 /* AVAudioConnect.swift */,
 				5535EE281F31007C00823456 /* english84.mp3 */,
 				5535EE2A1F31008700823456 /* english130.mp3 */,
+				5535EE141F30F1AD00823456 /* AppDelegate.swift */,
 				5535EE181F30F1AD00823456 /* Main.storyboard */,
 				5535EE1B1F30F1AD00823456 /* Assets.xcassets */,
 				5535EE1D1F30F1AD00823456 /* LaunchScreen.storyboard */,

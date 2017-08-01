@@ -86,32 +86,52 @@ extension AVAudioNode {
 
 
 
+infix operator >>>: AdditionPrecedence
 
 
-@discardableResult func +(left: AVAudioNode, right: AVAudioNode) -> AVAudioNode {
+@discardableResult func >>>(left: AVAudioNode, right: AVAudioNode) -> AVAudioNode {
     left.connect(to: right)
     return right
 }
-@discardableResult func +(left: AVAudioNode, right: AVAudioConnectionPoint) -> AVAudioNode {
+
+@discardableResult func >>>(left: AVAudioNode, right: AVAudioConnectionPoint) -> AVAudioNode {
     return left.connect(to: right.node!, bus: right.bus)
 }
-@discardableResult func +(left: AVAudioNode, right: [AVAudioNode]) -> [AVAudioNode] {
+@discardableResult func >>>(left: AVAudioNode, right: [AVAudioNode]) -> [AVAudioNode] {
     return left.connect(to: right)
 }
-@discardableResult func +(left: [AVAudioNode], right: AVAudioMixerNode) -> AVAudioMixerNode {
+
+@discardableResult func >>>(left: AVAudioNode, right: AVAudioMixerNode) -> AVAudioMixerNode {
+    return left.connect(to: right, bus: right.nextAvailableInputBus) as! AVAudioMixerNode
+}
+@discardableResult func >>>(left: [AVAudioNode], right: AVAudioMixerNode) -> AVAudioMixerNode {
     for node in left {
         node.connect(to: right, bus: right.nextAvailableInputBus)
     }
     return right
 }
-//@discardableResult func +(left: AVAudioNode, right: AVAudioMixerNode) -> AVAudioMixerNode {
-//    return left.connect(to: right, bus: right.nextAvailableInputBus) as! AVAudioMixerNode
-//}
 
 
 
 
+@discardableResult func +(left: AVAudioNode, right: AVAudioNode) -> AVAudioNode {
+    var connectionPoints = GlobalAudio.engine.outputConnectionPoints(for: left, outputBus: 0)
+    connectionPoints.append(AVAudioConnectionPoint(node: right, bus: 0))
+    left.connect(toConnectionPoints: connectionPoints)
+    return right
+}
 
+@discardableResult func +(left: AVAudioNode, right: AVAudioConnectionPoint) -> AVAudioNode {
+    var connectionPoints = GlobalAudio.engine.outputConnectionPoints(for: left, outputBus: 0)
+    connectionPoints.append(right)
+    return left.connect(to: right.node!, bus: right.bus)
+}
+@discardableResult func +(left: AVAudioNode, right: [AVAudioNode]) -> [AVAudioNode] {
+    var connectionPoints = GlobalAudio.engine.outputConnectionPoints(for: left, outputBus: 0)
+    let newConnectionPoints = right.map{AVAudioConnectionPoint.init(node: $0, bus: 0)}
+    connectionPoints.append(contentsOf: newConnectionPoints)
+    return left.connect(to: right)
+}
 
 
 

@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     let delay = AVAudioUnitDelay()
     let distortion = AVAudioUnitDistortion()
     
+    let mixer = AVAudioMixerNode()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,9 +32,27 @@ class ViewController: UIViewController {
         
         reverb.wetDryMix = 50
         
-        [player1 + reverb,
-         player2 + distortion + delay] + GlobalAudio.mainMixer
+        let config = 4  //try 1, 2, and 3
         
+        switch config {
+        case 1:
+            [player1 >>> reverb,
+             player2 >>> distortion >>> delay] >>> GlobalAudio.mainMixer
+        case 2:
+            player1 >>> reverb >>> GlobalAudio.mainMixer.bus(0)
+            player2 >>> distortion >>> delay >>> GlobalAudio.mainMixer.bus(1)
+        case 3:
+            //The output of mixer is split to distortion and delay
+            [player1, player2] >>> mixer  >>> [distortion, delay] >>> GlobalAudio.mainMixer
+        case 4:
+            //same setup as 3 diffent choice of operators
+            player1 >>> mixer
+            player2 >>> mixer
+            mixer + distortion
+            mixer + delay
+            distortion >>> GlobalAudio.mainMixer
+            delay >>> GlobalAudio.mainMixer
+        }
     }
 
     
