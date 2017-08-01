@@ -32,20 +32,21 @@ class ViewController: UIViewController {
         
         reverb.wetDryMix = 50
         
-        let config = 4  //try 1, 2, and 3
+        let config = 4  //try 1, 2, 3, and 4
         
         switch config {
         case 1:
             [player1 >>> reverb,
              player2 >>> distortion >>> delay] >>> GlobalAudio.mainMixer
         case 2:
+            //same setup as 1, but diffent choice of operators
             player1 >>> reverb >>> GlobalAudio.mainMixer.bus(0)
             player2 >>> distortion >>> delay >>> GlobalAudio.mainMixer.bus(1)
         case 3:
             //The output of mixer is split to distortion and delay
             [player1, player2] >>> mixer  >>> [distortion, delay] >>> GlobalAudio.mainMixer
         case 4:
-            //same setup as 3 diffent choice of operators
+            //same setup as 3, but diffent choice of operators
             player1 >>> mixer
             player2 >>> mixer
             mixer + distortion
