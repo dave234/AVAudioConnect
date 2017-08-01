@@ -12,6 +12,7 @@
 		5535EE1A1F30F1AD00823456 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5535EE181F30F1AD00823456 /* Main.storyboard */; };
 		5535EE1C1F30F1AD00823456 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5535EE1B1F30F1AD00823456 /* Assets.xcassets */; };
 		5535EE1F1F30F1AD00823456 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5535EE1D1F30F1AD00823456 /* LaunchScreen.storyboard */; };
+		5535EE271F30F1BE00823456 /* AVAudioConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5535EE261F30F1BE00823456 /* AVAudioConnect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		5535EE1B1F30F1AD00823456 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5535EE1E1F30F1AD00823456 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5535EE201F30F1AD00823456 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5535EE261F30F1BE00823456 /* AVAudioConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioConnect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				5535EE141F30F1AD00823456 /* AppDelegate.swift */,
 				5535EE161F30F1AD00823456 /* ViewController.swift */,
+				5535EE261F30F1BE00823456 /* AVAudioConnect.swift */,
 				5535EE181F30F1AD00823456 /* Main.storyboard */,
 				5535EE1B1F30F1AD00823456 /* Assets.xcassets */,
 				5535EE1D1F30F1AD00823456 /* LaunchScreen.storyboard */,
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5535EE271F30F1BE00823456 /* AVAudioConnect.swift in Sources */,
 				5535EE171F30F1AD00823456 /* ViewController.swift in Sources */,
 				5535EE151F30F1AD00823456 /* AppDelegate.swift in Sources */,
 			);
